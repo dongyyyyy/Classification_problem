@@ -11,7 +11,7 @@ class FaceDataset(data.Dataset):
     def __init__(self,
                  train=True):
         self.train = train
-        self.img_path = '../Dataset/faces_images'
+        self.img_path = './faces_images'
 
         self.train_img_path = []
         self.train_label = []
