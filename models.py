@@ -94,6 +94,6 @@ class model(nn.Module):
         x = self.FC1(x)
         x = self.FC2(x)
         x = self.FC3(x)
-        out = self.output(x)
+        out = x
 
         return out

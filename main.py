@@ -22,7 +22,8 @@ if __name__ == '__main__':
     if cuda:
         model = model.cuda()
     summary(model,input_size=(3,128,128))
-    loss_model = nn.CrossEntropyLoss()
+    #loss_model = nn.
+
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate,betas=(b1,b2))
 
     Tensor = torch.cuda.FloatTensor if cuda else torch.Tensor
@@ -45,7 +46,8 @@ if __name__ == '__main__':
             optimizer.zero_grad()
 
             pred = model(imgs)
-            loss = loss_model(pred,label)
+            #pred = F.softmax(pred,dim=0) # softmax
+            loss = F.cross_entropy(pred,label)
             total += imgs.size(0)
             #correct += (pred == label).sum().item()
             loss.backward()
