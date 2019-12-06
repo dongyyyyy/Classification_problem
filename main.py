@@ -13,7 +13,7 @@ if __name__ == '__main__':
     b1 = 0.5
     b2 = 0.999
     epochs = 20
-    batch_size = 8
+    batch_size = 4
 
     cuda = torch.cuda.is_available()
 
@@ -55,5 +55,7 @@ if __name__ == '__main__':
             #print(path)
             if i%10 == 0:
                 sys.stdout.write("[Epoch %d/%d] [Batch %d/%d] [loss: %f]\n" % (epoch, epochs, i, len(dataloader), loss.item()))
-                print("pred: {}".format(pred))
+                pred = torch.argmax(pred,dim=1)
+                print("pred : ", pred)
+                print("label : ", label)
                 #sys.stdout.write("[Epoch %d/%d] [Batch %d/%d] [loss: %f] [Acc: %f]"%(epoch,epochs,i,len(dataloader),loss.item(),100*correct/total))
