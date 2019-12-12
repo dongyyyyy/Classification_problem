@@ -21,6 +21,9 @@ class FaceDataset(data.Dataset):
         self.transforms = transforms.Compose(
             [
                 transforms.Resize((128,128), Image.BICUBIC),
+                transforms.RandomHorizontalFlip(),
+                transforms.ColorJitter(brightness=0.2,contrast=0.2,saturation=0.2,hue=0.2),
+                transforms.RandomRotation(degrees=10),
                 transforms.ToTensor(),
                 transforms.Normalize(mean,std)
             ]
@@ -35,8 +38,21 @@ class FaceDataset(data.Dataset):
 
             for name_label in train_file_name[1:]:
                 name, label = name_label.split(',')
-                self.train_img_path.append(os.path.join(self.img_path, name))
-                self.train_label.append(label)
+                if label == 1:
+                    for number in range(3):
+                        self.train_img_path.append(os.path.join(self.img_path, name))
+                        self.train_label.append(label)
+                elif label == 2:
+                    for number in range(9):
+                        self.train_img_path.append(os.path.join(self.img_path, name))
+                        self.train_label.append(label)
+                elif label == 4 or label == 5:
+                    for number in range(6):
+                        self.train_img_path.append(os.path.join(self.img_path, name))
+                        self.train_label.append(label)
+                else:
+                    self.train_img_path.append(os.path.join(self.img_path, name))
+                    self.train_label.append(label)
 
         else:
             test_file_name = []
